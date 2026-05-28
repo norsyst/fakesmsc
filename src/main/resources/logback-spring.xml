@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="C:/Users/Norberto/eclipse-workspace/logback-spring.xsd">
+	
+	<property name="LOGDIR" value="./logs" />
+	<property name="LOGFILE_PATTERN" value="%d{HH:mm:ss.SSS} %level %C{1} %M: %msg%n%throwable" />
+	<property name="LOGCONSOLE_PATTERN" value="%d{ISO8601} [%green(%level)][%yellow(%C{1}):%blue(%M)] %msg%n%throwable" />
+
+	<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${LOGCONSOLE_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>${LOGFILE_PATTERN}</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOGDIR}/%d{yyyy_MM_dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>10GB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+
+	<root level="ERROR">
+		<appender-ref ref="Console" />
+	</root>
+
+	<logger name="py.com.personal" level="ALL">
+		<appender-ref ref="RollingFile" />
+	</logger>
+
+	<logger name="py.com.webvas.personal" level="ALL">
+		<appender-ref ref="RollingFile" />
+	</logger>
+
+	<logger name="py.com.webvas" level="ALL">
+		<appender-ref ref="RollingFile" />
+	</logger>
+
+	<logger name="com.webvas" level="ALL">
+		<appender-ref ref="RollingFile" />
+	</logger>
+
+	<logger name="webvas" level="ALL">
+		<appender-ref ref="RollingFile" />
+	</logger>
+	
+	<logger name="com.norsyst" level="ALL">
+		<appender-ref ref="RollingFile" />
+	</logger>
+	
+	<logger name="com.norsyst.smpp" level="ALL">
+		<appender-ref ref="RollingFile" />
+	</logger>	
+</configuration>
